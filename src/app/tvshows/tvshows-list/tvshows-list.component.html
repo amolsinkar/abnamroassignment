@@ -1,0 +1,18 @@
+<div class="row rowalign align-items-center">
+  <div
+    *ngFor="let grpTvShows of groupTvShowsArr | keyvalue; let grpIndex = index"
+  >
+    <div>
+      <h2>{{ grpTvShows.key }}</h2>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+      <ng-container *ngFor="let tvshowEl of grpTvShows.value; let i = index">
+        <app-tvshow-item
+          fxFlex="1 2 13vw"
+          [tvshow]="tvshowEl"
+          [index]="i"
+        ></app-tvshow-item>
+      </ng-container>
+    </div>
+  </div>
+</div>

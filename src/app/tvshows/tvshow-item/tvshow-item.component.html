@@ -1,0 +1,39 @@
+<div class="marginbottom">
+  <figure>
+    <a
+      style="cursor: pointer"
+      [routerLink]="[tvshow.id]"
+      routerLinkActive="active"
+      
+    >
+      <img
+        [src]="tvshow?.image?.original"
+        alt="{{ tvshow.name }}-{{ tvshow.rating.average }}"
+        title=" {{ tvshow.name }}"
+        class="image-height img-responsive"
+      />
+    </a>
+  </figure>
+  <div>
+    <span class="title ellipsis" title=" {{ tvshow.name?.trim() }}">
+      {{ tvshow.name?.trim() }}
+    </span>
+
+    <span class="title" title="Rating-{{ tvshow.rating.average }}"
+      ><span class="glyphicon glyphicon-star-empty"></span>
+      {{ tvshow.rating.average }}</span
+    >
+  </div>
+</div>
+<!-- <a
+  style="cursor: pointer"
+  [routerLink]="[index]"
+  routerLinkActive="active"
+  class="list-group-item clearfix"
+>
+  <div class="pull-left">
+    <h4 class="list-group-item-heading"></h4>
+    <p class="list-group-item-text">Rating - {{ tvshow.rating?.average }}</p>
+  </div>
+  <span class="pull-right"> </span>
+</a> -->

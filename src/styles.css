@@ -1,0 +1,86 @@
+body {
+  background-color: rgb(236, 248, 255);
+}
+.image-container {
+  display: flex;
+  /* height: 100vh; */
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+/* Column Gap */
+.cardList > * {
+  box-sizing: border-box;
+}
+.cardList > *:not(:last-child) {
+  margin-right: 10px;
+}
+/* Item sizing */
+.cardListItem {
+  flex: 1 1 calc(33.3% - 10px);
+}
+
+.title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  color: #000;
+}
+div .ellipsis {
+  white-space: nowrap;
+  width: 11vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.ellipsis:hover {
+  overflow: visible;
+}
+
+.marginbottom {
+  /* padding: 1rem; */
+  margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 900px) {
+  .paddingCenter {
+    padding-left: 6vw;
+  }
+  .image-height {
+    width: 10em;
+    height: 12em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .paddingCenter {
+    padding-left: 12vw;
+  }
+  .image-height {
+    width: 4em;
+    height: 5em;
+  }
+}
+.rowalign {
+  margin: auto;
+  /* align-self: center; */
+  /* align-content: center; */
+  margin-top: 1vw;
+}
