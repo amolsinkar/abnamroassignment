@@ -9,16 +9,27 @@
       (keyup.enter)="tvshowsSearch()"
       maxlength="25"
       formControlName="txtSearch"
+      #txtSearch
     />
     <div class="input-group-btn">
       <button
         class="btn btntop"
         type="submit"
+        id="btnSearch"
         (click)="tvshowsSearch()"
         (keyup.enter)="tvshowsSearch()"
       >
         <span class="glyphicon glyphicon-search"></span>
       </button>
     </div>
+  </div>
+
+  <div
+    *ngIf="f.txtSearch.invalid && (f.txtSearch.dirty || f.txtSearch.touched)"
+    class="alert alert-danger"
+  >
+    <span ng-show="f.txtSearch.value.$error?.pattern">
+      Please use numbers and letters only
+    </span>
   </div>
 </form>
