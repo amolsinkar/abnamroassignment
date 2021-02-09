@@ -33,7 +33,7 @@ describe('SearchBarComponent', () => {
   });
 
   it(`alphaNumericValidator has default value`, () => {
-    expect(component.alphaNumericValidator).toEqual(`^[a-zA-Z0-9]$`);
+    expect(component.alphaNumericValidator).toEqual('^$|^[A-Za-z0-9]+');
   });
 
   describe('ngOnInit', () => {

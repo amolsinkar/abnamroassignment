@@ -27,7 +27,7 @@ export class SearchBarComponent implements OnInit {
   }
   // , Validators.pattern(this.alphaNumericValidator)],
   tvshowsSearch() {
-    if (!this.f.txtSearch.invalid) {
+    if (!this.f?.txtSearch?.invalid) {
       this.router.navigate(['tvshows'], {
         queryParams: { search: this.txtSearchVal },
       });
@@ -35,6 +35,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   get f() {
-    return this.searchForm.controls;
+    return this.searchForm?.controls;
   }
 }
