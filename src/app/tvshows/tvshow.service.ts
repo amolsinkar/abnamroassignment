@@ -14,17 +14,12 @@ export class TvshowService {
 
   setTvshows(tvshows: TvshowModel[]) {
     this.tvshows = tvshows;
-    this.tvshowsChanged.next(this.tvshows?.slice());
+    // this.tvshowsChanged.next(this.tvshows?.slice());
   }
 
   getTvshows() {
     return this.tvshows ? this.tvshows.slice() : [];
   }
-
-  // getTvshow() {
-  //   return this.tvshows;
-  //   // return this.tvshowsChanged.asObservable();
-  // }
 
   setTvshowsSearch(txtSearch) {
     this.searchSubject.next({ txtSearch });

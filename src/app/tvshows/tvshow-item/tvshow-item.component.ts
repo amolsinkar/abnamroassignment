@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class TvshowItemComponent implements OnInit {
   @Input() tvshow: TvshowModel;
   @Input() index: number;
-  @Output() tvshowDetail = new EventEmitter<TvshowModel>();
-  constructor(private tvshowService: TvshowService, private router: Router) {}
+
+  constructor() {}
 
   ngOnInit(): void {}
 }

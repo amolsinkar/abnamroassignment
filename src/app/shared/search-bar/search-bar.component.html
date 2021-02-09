@@ -1,20 +1,24 @@
-<div class="input-group">
-  <input
-    type="text"
-    class="form-control"
-    placeholder="Search"
-    id="txtSearch"
-    [(ngModel)]="txtSearchVal"
-    (keyup.enter)="tvshowsSearch()"
-  />
-  <div class="input-group-btn">
-    <button
-      class="btn btntop"
-      type="submit"
-      (click)="tvshowsSearch()"
+<form [formGroup]="searchForm">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search"
+      id="txtSearch"
+      [(ngModel)]="txtSearchVal"
       (keyup.enter)="tvshowsSearch()"
-    >
-      <span class="glyphicon glyphicon-search"></span>
-    </button>
+      maxlength="25"
+      formControlName="txtSearch"
+    />
+    <div class="input-group-btn">
+      <button
+        class="btn btntop"
+        type="submit"
+        (click)="tvshowsSearch()"
+        (keyup.enter)="tvshowsSearch()"
+      >
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
+    </div>
   </div>
-</div>
+</form>

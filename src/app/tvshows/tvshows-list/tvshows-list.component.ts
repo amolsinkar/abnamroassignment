@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -15,44 +15,37 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
   groupTvShowsArr;
   tvshows: TvshowModel[];
   subscription: Subscription;
-  messages: any[] = [];
+  noresultfound = true;
 
   constructor(
     private tvshowService: TvshowService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.tvshowService
-      .getTvshowsSearch()
-      .subscribe((message) => {
-        if (message) {
-          const centers = this.tvshows?.filter((element) => {
-            return element.name
-              .toLowerCase()
-              .includes(message?.txtSearch?.toLowerCase());
-          });
-          centers?.sort((a, b) => b.rating.average - a.rating.average);
-          this.groupTvShowsArr = this.filterByGenre(centers);
-        } else {
-          // clear messages when empty message received
-          this.messages = [];
-        }
-      });
-
-    this.subscription = this.tvshowService.tvshowsChanged.subscribe(
-      (tvshows: TvshowModel[]) => {
-        this.tvshows = tvshows;
-      },
-      (err) => {
-        console.log(err.message);
-      },
-      () => {
-        console.log('completed');
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.tvshowLoad();
+    this.route.queryParamMap?.subscribe((params) => {
+      if (params && params.get('search')) {
+        const showList = this.tvshows?.filter((element) => {
+          return element.name
+            .toLowerCase()
+            .includes(params.get('search')?.toLowerCase());
+        });
+        showList?.sort((a, b) => b.rating.average - a.rating.average);
+        this.groupTvShowsArr = this.filterByGenre(showList);
+        showList.length
+          ? (this.noresultfound = true)
+          : (this.noresultfound = false);
+        // this.changeDetectorRef.detectChanges();
       }
-    );
-    this.tvshows = this.tvshowService.getTvshows();
+    });
+  }
+
+  tvshowLoad() {
+    this.tvshows = this.route.snapshot?.data['showResolver'];
     this.tvshows?.sort((a, b) => b.rating.average - a.rating.average);
     this.groupTvShowsArr = this.filterByGenre(this.tvshows);
   }
@@ -70,5 +63,9 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
       });
       return r;
     }, {});
+  }
+
+  onLinkClick() {
+    this.router.navigateByUrl('/tvshows');
   }
 }

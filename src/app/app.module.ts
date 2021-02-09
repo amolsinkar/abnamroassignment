@@ -18,6 +18,7 @@ import { HeaderInterceptor } from './interceptor/header.interceptor';
 import { HttpErrorInterceptor } from './interceptor/httperror.interceptor';
 import { GlobalErrorHandler } from './shared/globalerrorhandler.service';
 import { LoggingService } from './shared/logging.service';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { LoggingService } from './shared/logging.service';
     TvshowItemComponent,
     TvshowDetailComponent,
     SearchBarComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

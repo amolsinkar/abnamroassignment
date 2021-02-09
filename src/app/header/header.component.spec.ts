@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TvshowService } from '../tvshows/tvshow.service';
-import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -10,14 +9,15 @@ describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(() => {
-    const tvshowServiceStub = () => ({
-      setTvshowsSearch: txtSearchVal => ({})
-    });
+    const tvshowServiceStub = () => ({});
+    const routerStub = () => ({ navigateByUrl: (string) => ({}) });
     TestBed.configureTestingModule({
-      imports: [FormsModule, RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [HeaderComponent],
-      providers: [{ provide: TvshowService, useFactory: tvshowServiceStub }]
+      providers: [
+        { provide: TvshowService, useFactory: tvshowServiceStub },
+        { provide: Router, useFactory: routerStub },
+      ],
     });
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
@@ -27,14 +27,12 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('tvshowsSearch', () => {
+  describe('routeToTvshows', () => {
     it('makes expected calls', () => {
-      const tvshowServiceStub: TvshowService = fixture.debugElement.injector.get(
-        TvshowService
-      );
-      spyOn(tvshowServiceStub, 'setTvshowsSearch').and.callThrough();
-      component.tvshowsSearch();
-      expect(tvshowServiceStub.setTvshowsSearch).toHaveBeenCalled();
+      const routerStub: Router = fixture.debugElement.injector.get(Router);
+      spyOn(routerStub, 'navigateByUrl').and.callThrough();
+      component.routeToTvshows();
+      expect(routerStub.navigateByUrl).toHaveBeenCalled();
     });
   });
 });

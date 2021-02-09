@@ -1,18 +1,44 @@
 <div class="row rowalign align-items-center">
-  <div
-    *ngFor="let grpTvShows of groupTvShowsArr | keyvalue; let grpIndex = index"
-  >
-    <div>
-      <h2>{{ grpTvShows.key }}</h2>
-    </div>
-    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start">
-      <ng-container *ngFor="let tvshowEl of grpTvShows.value; let i = index">
-        <app-tvshow-item
-          fxFlex="1 2 13vw"
-          [tvshow]="tvshowEl"
-          [index]="i"
-        ></app-tvshow-item>
-      </ng-container>
+  <div *ngIf="noresultfound; else noResultfound">
+    <div
+      *ngFor="
+        let grpTvShows of groupTvShowsArr | keyvalue;
+        let grpIndex = index
+      "
+    >
+      <div>
+        <h2>{{ grpTvShows.key }}</h2>
+      </div>
+      <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+        <ng-container *ngFor="let tvshowEl of grpTvShows.value; let i = index">
+          <app-tvshow-item
+            fxFlex="1 2 13vw"
+            [tvshow]="tvshowEl"
+            [index]="i"
+          ></app-tvshow-item>
+        </ng-container>
+      </div>
     </div>
   </div>
+  <ng-template #noResultfound>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="error-template">
+            <h1>Oops!</h1>
+            <h2>No Result Found</h2>
+            <div class="error-details">
+              Sorry, Requested search keyword not found! Please try another
+              keyword to search TVShows.
+            </div>
+            <div class="error-actions">
+              <a (click)="onLinkClick()" class="btn btn-primary btn-lg"
+                ><span class="glyphicon glyphicon-home"></span> Take Me TVShows
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
