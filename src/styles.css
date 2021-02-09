@@ -59,7 +59,7 @@ div.ellipsis:hover {
   margin-bottom: 2rem;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 640px) and (orientation: portrait) {
   .paddingCenter {
     padding-left: 8vw;
   }
@@ -67,11 +67,34 @@ div.ellipsis:hover {
     width: 8em;
     height: 10em;
   }
-  .breakword{
-    word-break: break-all
+  .breakword {
+    word-break: break-all;
+  }
+  .padLeft {
+    padding-left: 8vh;
+  }
+  .rowalign {
+    margin-top: 1vw;
   }
 }
-
+@media screen and (max-width: 640px) and (orientation: landscape) {
+  .paddingCenter {
+    padding-left: 8vw;
+  }
+  .image-height {
+    width: 8em;
+    height: 10em;
+  }
+  .breakword {
+    word-break: break-all;
+  }
+  .padLeft {
+    padding-left: 15vh;
+  }
+  .rowalign {
+        margin-top: 1vw;
+  }
+}
 @media screen and (min-width: 900px) {
   .paddingCenter {
     padding-left: 4vw;
@@ -80,10 +103,15 @@ div.ellipsis:hover {
     width: 10em;
     height: 12em;
   }
-}
-.rowalign {
-  margin: auto;
-  /* align-self: center; */
-  /* align-content: center; */
-  margin-top: 1vw;
+  .rowalign {
+    margin: auto;
+    margin-top: 1vw;
+  }
+  .marginAutoPad4 {
+    margin: auto;
+    padding-left: 5vh;
+  }
+  .marginAuto {
+    margin: auto;
+  }
 }
