@@ -25,7 +25,7 @@ export class SearchBarComponent implements OnInit {
       txtSearch: ['', [Validators.pattern(this.alphaNumericValidator)]],
     });
   }
-  // , Validators.pattern(this.alphaNumericValidator)],
+
   tvshowsSearch() {
     if (!this.f?.txtSearch?.invalid) {
       this.router.navigate(['tvshows'], {
