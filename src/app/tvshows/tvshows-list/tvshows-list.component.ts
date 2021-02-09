@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { TvshowModel } from '../tvshow.model';
@@ -27,12 +27,12 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.tvshowLoad();
-    this.route.queryParamMap?.subscribe((params) => {
-      if (params && params.get('search')) {
+    this.route.queryParamMap?.subscribe((params: ParamMap) => {
+      if (params && params?.get('search')) {
         const showList = this.tvshows?.filter((element) => {
           return element.name
             .toLowerCase()
-            .includes(params.get('search')?.toLowerCase());
+            .includes(params?.get('search')?.toLowerCase());
         });
         showList?.sort((a, b) => b.rating.average - a.rating.average);
         this.groupTvShowsArr = this.filterByGenre(showList);

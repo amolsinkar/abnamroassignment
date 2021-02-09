@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, convertToParamMap } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { TvshowService } from '../tvshow.service';
 import { TvshowsListComponent } from './tvshows-list.component';
@@ -10,6 +10,7 @@ import { of } from 'rxjs';
 describe('TvshowsListComponent', () => {
   let component: TvshowsListComponent;
   let fixture: ComponentFixture<TvshowsListComponent>;
+
   const tvshowData = [
     {
       id: 1,
@@ -68,14 +69,13 @@ describe('TvshowsListComponent', () => {
     const changeDetectorRefStub = () => ({});
     const routerStub = () => ({
       routeReuseStrategy: { shouldReuseRoute: () => false },
-      navigateByUrl: (string) => ({}),
+      navigateByUrl: (string) => jasmine.createSpy('navigateByUrl'),
     });
     const activatedRouteStub = () => ({
       queryParamMap: of({
-        params: {
-          get: () => {
-            search: 'text';
-          },
+        params: jasmine.createSpy('params'),
+        get: () => {
+          return 'search';
         },
       }),
       snapshot: { data: { showResolver: tvshowData } },
@@ -106,11 +106,15 @@ describe('TvshowsListComponent', () => {
   it(`noresultfound has default value`, () => {
     expect(component.noresultfound).toEqual(true);
   });
+  it(`tvshowLoad `, () => {
+    expect(component.tvshowLoad).toBeTruthy();
+  });
 
   describe('ngOnInit', () => {
     it('makes expected calls', () => {
       spyOn(component, 'tvshowLoad').and.callThrough();
       spyOn(component, 'filterByGenre').and.callThrough();
+      component.tvshows = tvshowData;
       component.ngOnInit();
       expect(component.tvshowLoad).toHaveBeenCalled();
       expect(component.filterByGenre).toHaveBeenCalled();

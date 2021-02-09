@@ -24,13 +24,4 @@ export class DataStorageService {
       })
     );
   }
-
-  // getTVshows() {
-  //   // const headers = new HttpHeaders({ 'Content-Type': 'text/plain' }); , { headers }
-  //   return this.http.get<TvshowModel[]>('http://api.tvmaze.com/shows').pipe(
-  //     map((tvshows) => {
-  //       return tvshows;
-  //     })
-  //   );
-  // }
 }
