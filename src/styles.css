@@ -59,23 +59,26 @@ div.ellipsis:hover {
   margin-bottom: 2rem;
 }
 
+@media screen and (max-width: 640px) {
+  .paddingCenter {
+    padding-left: 8vw;
+  }
+  .image-height {
+    width: 8em;
+    height: 10em;
+  }
+  .breakword{
+    word-break: break-all
+  }
+}
+
 @media screen and (min-width: 900px) {
   .paddingCenter {
-    padding-left: 6vw;
+    padding-left: 4vw;
   }
   .image-height {
     width: 10em;
     height: 12em;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .paddingCenter {
-    padding-left: 12vw;
-  }
-  .image-height {
-    width: 4em;
-    height: 5em;
   }
 }
 .rowalign {
