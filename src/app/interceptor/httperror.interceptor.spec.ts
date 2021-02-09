@@ -1,17 +1,23 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpRequest,
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse,
+  HttpClient,
+} from '@angular/common/http';
 import { HttpHandler, HttpEvent } from '@angular/common/http';
 import { HttpErrorInterceptor } from './httperror.interceptor';
 import {
   HttpTestingController,
   HttpClientTestingModule,
 } from '@angular/common/http/testing';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 describe('HttpErrorInterceptor', () => {
   let service: HttpErrorInterceptor;
   let httpMock: HttpTestingController;
 
+  const testUrl = '/tvshows';
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -34,7 +40,11 @@ describe('HttpErrorInterceptor', () => {
 
   describe('intercept', () => {
     it('makes expected calls', () => {
-      const httpRequestStub: HttpRequest<any> = <any>{};
+      const httpRequestStub: HttpRequest<any> = <any>{
+        clone: () => {
+          return of();
+        },
+      };
       const httpHandlerStub: HttpHandler = <any>{
         handle: () => {
           return of();

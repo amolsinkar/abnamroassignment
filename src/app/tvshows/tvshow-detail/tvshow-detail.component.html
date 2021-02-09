@@ -1,13 +1,37 @@
 <div class="row paddingCenter rowalign">
-  <div class="col-xs-12">
-    <img
-      [src]="tvshow?.image?.medium"
-      alt="{{ tvshow?.name }}"
-      class="img-responsive"
-      style="max-height: 300px"
-    />
-  </div>
-  <div class="col-xs-12">
-    <h1>{{ tvshow?.name }}</h1>
-  </div>
+  <fieldset>
+    <legend>
+      <h1>{{ tvshow?.name }}</h1>
+    </legend>
+    <div class="col-xs-2 col-md-3">
+      <img
+        [src]="tvshow?.image?.medium"
+        alt="{{ tvshow?.name }}"
+        class="img-responsive"
+        style="max-height: 300px"
+      />
+    </div>
+    <div class="col-xs-10" class="col-md-9">
+      <div>
+        <label>Natwork:&nbsp;</label>{{ tvshow?.network?.country?.name }}
+      </div>
+      <div><label>Type:&nbsp;</label> {{ tvshow?.type }}</div>
+      <div><label>Language:&nbsp;</label>{{ tvshow?.language }}</div>
+      <div><label>Genre:&nbsp;</label>{{ tvshow?.genres }}</div>
+      <div><label>Rating:&nbsp;</label>{{ tvshow?.rating.average }}</div>
+      <div><label>Status:&nbsp;</label>{{ tvshow?.status }}</div>
+      <div>
+        <label>Schdule:&nbsp;</label>{{ tvshow?.schedule.days }} -
+        {{ tvshow?.schedule.time }}
+      </div>
+      <div>
+        <label>Official Site:&nbsp;</label
+        ><a href="{{ tvshow?.officialSite }}">{{ tvshow?.officialSite }}</a>
+      </div>
+      <div>
+        <label>Description:&nbsp;</label
+        ><span innerHTML="{{ tvshow?.summary }}"> </span>
+      </div>
+    </div>
+  </fieldset>
 </div>

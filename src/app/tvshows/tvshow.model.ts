@@ -11,4 +11,10 @@ export class TvshowModel {
     original: string;
   };
   public genre?: string;
+  public status: string;
+  public network: { country: { code: string; name: string } };
+  public summary: string;
+  public schedule: { days: []; time: string };
+  public officialSite: string;
+  public runtime: number;
 }
