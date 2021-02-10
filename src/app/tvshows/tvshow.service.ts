@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
 import { TvshowModel } from './tvshow.model';
-import { DataStorageService } from '../shared/data-storage.service';
 
 @Injectable()
 export class TvshowService {

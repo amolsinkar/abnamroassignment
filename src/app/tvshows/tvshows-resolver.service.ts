@@ -7,7 +7,6 @@ import {
 import { TvshowService } from './tvshow.service';
 import { TvshowModel } from './tvshow.model';
 import { DataStorageService } from '../shared/data-storage.service';
-import { from } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TvshowsResolverService implements Resolve<TvshowModel[]> {
@@ -23,6 +22,5 @@ export class TvshowsResolverService implements Resolve<TvshowModel[]> {
     } else {
       return shows;
     }
-    // return this.dataStorageService.fetchTvshows();
   }
 }

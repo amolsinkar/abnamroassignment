@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
-import { Router, convertToParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { TvshowService } from '../tvshow.service';
 import { TvshowsListComponent } from './tvshows-list.component';
 import { of } from 'rxjs';
+import { TvshowModel } from '../tvshow.model';
 
 describe('TvshowsListComponent', () => {
   let component: TvshowsListComponent;
   let fixture: ComponentFixture<TvshowsListComponent>;
 
-  const tvshowData = [
+  const tvshowData: TvshowModel[] = [
     {
       id: 1,
       url: 'http://www.tvmaze.com/shows/1/under-the-dome',
@@ -80,7 +80,7 @@ describe('TvshowsListComponent', () => {
       }),
       snapshot: { data: { showResolver: tvshowData } },
     });
-    const tvshowServiceStub = () => ({});
+
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [TvshowsListComponent],
@@ -88,7 +88,6 @@ describe('TvshowsListComponent', () => {
         { provide: ChangeDetectorRef, useFactory: changeDetectorRefStub },
         { provide: Router, useFactory: routerStub },
         { provide: ActivatedRoute, useFactory: activatedRouteStub },
-        { provide: TvshowService, useFactory: tvshowServiceStub },
       ],
     });
     fixture = TestBed.createComponent(TvshowsListComponent);

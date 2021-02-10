@@ -13,11 +13,7 @@ export class SearchBarComponent implements OnInit {
   alphaNumericValidator = '^$|^[A-Za-z0-9]+';
   searchForm: FormGroup;
 
-  constructor(
-    private tvshowService: TvshowService,
-    private router: Router,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.txtSearchVal = '';

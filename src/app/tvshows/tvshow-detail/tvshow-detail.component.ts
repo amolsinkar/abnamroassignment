@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { TvshowModel } from '../tvshow.model';
-import { TvshowService } from '../tvshow.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,12 +13,7 @@ export class TvshowDetailComponent implements OnInit, OnDestroy {
   tvshows: TvshowModel[];
   id: number;
   subscription: Subscription;
-  constructor(
-    private tvshowService: TvshowService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe((params: Params) => {

@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { TvshowModel } from '../tvshow.model';
-import { TvshowService } from '../tvshow.service';
 
 @Component({
   selector: 'app-tvshows-list',
@@ -17,12 +16,7 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   noresultfound = true;
 
-  constructor(
-    private tvshowService: TvshowService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -39,7 +33,6 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
         showList.length
           ? (this.noresultfound = true)
           : (this.noresultfound = false);
-        // this.changeDetectorRef.detectChanges();
       }
     });
   }

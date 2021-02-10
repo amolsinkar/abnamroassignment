@@ -11,7 +11,6 @@ describe('SearchBarComponent', () => {
   let fixture: ComponentFixture<SearchBarComponent>;
 
   beforeEach(() => {
-    const tvshowServiceStub = () => ({});
     const routerStub = () => ({ navigate: (array, object) => ({}) });
     const formBuilderStub = () => ({ group: (object) => ({}) });
     TestBed.configureTestingModule({
@@ -19,7 +18,6 @@ describe('SearchBarComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [SearchBarComponent],
       providers: [
-        { provide: TvshowService, useFactory: tvshowServiceStub },
         { provide: Router, useFactory: routerStub },
         { provide: FormBuilder, useFactory: formBuilderStub },
       ],

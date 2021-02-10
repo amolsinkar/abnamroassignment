@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { TvshowService } from './tvshow.service';
+import { TvshowModel } from './tvshow.model';
 
 describe('TvshowService', () => {
   let service: TvshowService;
-  const tvshowData = [
+  const tvshowData: TvshowModel[] = [
     {
       id: 1,
       url: 'http://www.tvmaze.com/shows/1/under-the-dome',
@@ -66,7 +67,6 @@ describe('TvshowService', () => {
     expect(service).toBeTruthy();
   });
   it('unit test setTvshows', () => {
-    // spyOn(service, 'setTvshows').withArgs(tvshowData).and.callThrough();
     service.setTvshows(tvshowData);
     expect(service.setTvshows).toBeDefined();
   });

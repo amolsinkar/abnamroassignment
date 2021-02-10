@@ -12,9 +12,35 @@ export class TvshowModel {
   };
   public genre?: string;
   public status: string;
-  public network: { country: { code: string; name: string } };
+  public network: {
+    id?: number;
+    name: string;
+    country: {
+      code: string;
+      name: string;
+      timezone: string;
+    };
+  };
   public summary: string;
-  public schedule: { days: []; time: string };
+  public schedule: { days: {}; time: string };
+  public premiered: string;
+  public weight: number;
+  public webChannel: string;
   public officialSite: string;
   public runtime: number;
+  public externals: {
+    tvrage: number;
+    thetvdb: number;
+    imdb: string;
+  };
+  public updated: number;
+
+  public _links: {
+    self: {
+      href: string;
+    };
+    previousepisode: {
+      href: string;
+    };
+  };
 }

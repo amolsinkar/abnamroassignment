@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
-import { TvshowService } from '../tvshow.service';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
 import { TvshowDetailComponent } from './tvshow-detail.component';
 
 describe('TvshowDetailComponent', () => {
@@ -168,22 +165,14 @@ describe('TvshowDetailComponent', () => {
     },
   ];
   beforeEach(() => {
-    const changeDetectorRefStub = () => ({});
-    const tvshowServiceStub = () => tvshowData;
     const activatedRouteStub = () => ({
       params: { subscribe: (f) => f({ search: 'test' }) },
       snapshot: { data: { filter: () => tvshowData } },
     });
-    const routerStub = () => ({});
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [TvshowDetailComponent],
-      providers: [
-        { provide: ChangeDetectorRef, useFactory: changeDetectorRefStub },
-        { provide: TvshowService, useFactory: tvshowServiceStub },
-        { provide: ActivatedRoute, useFactory: activatedRouteStub },
-        { provide: Router, useFactory: routerStub },
-      ],
+      providers: [{ provide: ActivatedRoute, useFactory: activatedRouteStub }],
     });
     fixture = TestBed.createComponent(TvshowDetailComponent);
     component = fixture.componentInstance;
@@ -194,12 +183,7 @@ describe('TvshowDetailComponent', () => {
   });
   describe('ngOnInit', () => {
     it('makes expected calls', () => {
-      const tvshowServiceStub: TvshowService = fixture.debugElement.injector.get(
-        TvshowService
-      );
-
       component.ngOnInit();
-
+    });
   });
-});
 });
