@@ -16,12 +16,12 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   noresultfound = true;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.tvshowLoad();
-    this.route.queryParamMap?.subscribe((params: ParamMap) => {
+    this.activatedRoute.queryParamMap?.subscribe((params: ParamMap) => {
       if (params && params?.get('search')) {
         const showList = this.tvshows?.filter((element) => {
           return element.name
@@ -38,8 +38,9 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
   }
 
   tvshowLoad(): void {
-    const showResolver = 'showResolver';
-    this.tvshows = this.route.snapshot?.data[showResolver];
+    this.activatedRoute.data?.subscribe((data) => {
+      this.tvshows = data?.showResolver;
+    });
     this.tvshows?.sort((a, b) => b.rating.average - a.rating.average);
     this.groupTvShowsArr = this.filterByGenre(this.tvshows);
   }

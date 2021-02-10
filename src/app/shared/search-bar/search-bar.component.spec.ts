@@ -11,7 +11,11 @@ describe('SearchBarComponent', () => {
   let fixture: ComponentFixture<SearchBarComponent>;
 
   beforeEach(() => {
-    const routerStub = () => ({ navigate: (array, object) => ({}) });
+    const routerStub = () => ({
+      // routeReuseStrategy: { shouldReuseRoute: () => false },
+      navigate: () => jasmine.createSpy('navigate'),
+      navigateByUrl: () => jasmine.createSpy('navigateByUrl'),
+    });
     const formBuilderStub = () => ({ group: (obj) => ({}) });
     // group(controlsConfig: { [key: string]: any; }, options?: AbstractControlOptions): FormGroup
     TestBed.configureTestingModule({
@@ -49,9 +53,9 @@ describe('SearchBarComponent', () => {
   describe('tvshowsSearch', () => {
     it('makes expected calls', () => {
       const routerStub: Router = fixture.debugElement.injector.get(Router);
-      spyOn(routerStub, 'navigate').and.callThrough();
+      spyOn(routerStub, 'navigateByUrl').and.callThrough();
       component.tvshowsSearch();
-      expect(routerStub.navigate).toHaveBeenCalled();
+      expect(routerStub.navigateByUrl).toHaveBeenCalled();
     });
   });
 });

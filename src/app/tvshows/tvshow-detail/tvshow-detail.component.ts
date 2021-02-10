@@ -10,24 +10,13 @@ import { Subscription } from 'rxjs';
 })
 export class TvshowDetailComponent implements OnInit, OnDestroy {
   tvshow: TvshowModel;
-  tvshows: TvshowModel[];
   id: number;
   subscription: Subscription;
-  constructor(private route: ActivatedRoute) {}
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.subscription = this.route.params.subscribe((params: Params) => {
-      const id = 'id';
-      const showResolverDetails = 'showResolverDetails';
-      this.id = +params[id];
-      this.tvshows = this.route.snapshot.data[showResolverDetails]?.filter(
-        (element: TvshowModel) => {
-          if (element.id === this.id) {
-            return element;
-          }
-        }
-      );
-      this.tvshow = this.tvshows && this.tvshows[0];
+    this.subscription = this.activatedRoute.data?.subscribe((data) => {
+      this.tvshow = data?.showResolverDetails;
     });
   }
 

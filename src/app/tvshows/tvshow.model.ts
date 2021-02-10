@@ -44,3 +44,53 @@ export class TvshowModel {
     };
   };
 }
+
+export class SearchTvshowModel {
+  score: number;
+  show: {
+    id: number;
+    url: string;
+    name: string;
+    type: string;
+    language: string;
+    genres: string[];
+    rating: { average: number };
+    image: {
+      medium: string;
+      original: string;
+    };
+    genre?: string;
+    status: string;
+    network: {
+      id?: number;
+      name: string;
+      country: {
+        code: string;
+        name: string;
+        timezone: string;
+      };
+    };
+    summary: string;
+    schedule: { days: {}; time: string };
+    premiered: string;
+    weight: number;
+    webChannel: string;
+    officialSite: string;
+    runtime: number;
+    externals: {
+      tvrage: number;
+      thetvdb: number;
+      imdb: string;
+    };
+    updated: number;
+
+    _links: {
+      self: {
+        href: string;
+      };
+      previousepisode: {
+        href: string;
+      };
+    };
+  };
+}

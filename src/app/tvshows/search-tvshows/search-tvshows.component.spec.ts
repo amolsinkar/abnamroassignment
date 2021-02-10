@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TvshowDetailComponent } from './tvshow-detail.component';
+import { Router } from '@angular/router';
+import { TvshowService } from '../tvshow.service';
+import { SearchTvshowsComponent } from './search-tvshows.component';
 import { of } from 'rxjs';
 
-describe('TvshowDetailComponent', () => {
-  let component: TvshowDetailComponent;
-  let fixture: ComponentFixture<TvshowDetailComponent>;
+describe('SearchTvshowsComponent', () => {
+  let component: SearchTvshowsComponent;
+  let fixture: ComponentFixture<SearchTvshowsComponent>;
   const tvshowData = [
     {
       id: 1,
@@ -167,25 +169,55 @@ describe('TvshowDetailComponent', () => {
   ];
   beforeEach(() => {
     const activatedRouteStub = () => ({
-      params: { subscribe: (f) => f({ search: 'test' }) },
-      snapshot: { data: { filter: () => tvshowData } },
-      data: of({ showResolverDetails: tvshowData }),
+      queryParamMap: of({
+        params: jasmine.createSpy('params'),
+        get: () => {
+          return 'search';
+        },
+      }),
+    });
+    const routerStub = () => ({ navigateByUrl: () => ({}) });
+    const tvshowServiceStub = () => ({
+      searchTvshows: (searchText) => ({ subscribe: (f) => f(of(tvshowData)) }),
     });
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
-      declarations: [TvshowDetailComponent],
-      providers: [{ provide: ActivatedRoute, useFactory: activatedRouteStub }],
+      declarations: [SearchTvshowsComponent],
+      providers: [
+        { provide: ActivatedRoute, useFactory: activatedRouteStub },
+        { provide: Router, useFactory: routerStub },
+        { provide: TvshowService, useFactory: tvshowServiceStub },
+      ],
     });
-    fixture = TestBed.createComponent(TvshowDetailComponent);
+    fixture = TestBed.createComponent(SearchTvshowsComponent);
     component = fixture.componentInstance;
   });
 
   it('can load instance', () => {
     expect(component).toBeTruthy();
   });
+
+  it(`noresultfound has default value`, () => {
+    expect(component.noresultfound).toEqual(true);
+  });
+
   describe('ngOnInit', () => {
     it('makes expected calls', () => {
+      const tvshowServiceStub: TvshowService = fixture.debugElement.injector.get(
+        TvshowService
+      );
+      spyOn(tvshowServiceStub, 'searchTvshows').and.callThrough();
       component.ngOnInit();
+      expect(tvshowServiceStub.searchTvshows).toHaveBeenCalled();
+    });
+  });
+
+  describe('onLinkClick', () => {
+    it('makes expected calls', () => {
+      const routerStub: Router = fixture.debugElement.injector.get(Router);
+      spyOn(routerStub, 'navigateByUrl').and.callThrough();
+      component.onLinkClick();
+      expect(routerStub.navigateByUrl).toHaveBeenCalled();
     });
   });
 });

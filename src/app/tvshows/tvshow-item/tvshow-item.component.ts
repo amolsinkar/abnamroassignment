@@ -12,7 +12,11 @@ export class TvshowItemComponent implements OnInit {
   @Input() tvshow: TvshowModel;
   @Input() index: number;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  sendToList(id): void {
+    this.router?.navigate(['tvshows/' + id]);
+  }
 }

@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { DataStorageService } from '../shared/data-storage.service';
 import { TvshowService } from './tvshow.service';
 import { TvshowModel } from './tvshow.model';
 
@@ -59,20 +60,19 @@ describe('TvshowService', () => {
     },
   ];
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [TvshowService] });
+    const dataStorageServiceStub = () => ({
+      getSearchTvshows: (searchText) => ({}),
+    });
+    TestBed.configureTestingModule({
+      providers: [
+        TvshowService,
+        { provide: DataStorageService, useFactory: dataStorageServiceStub },
+      ],
+    });
     service = TestBed.inject(TvshowService);
   });
 
   it('can load instance', () => {
     expect(service).toBeTruthy();
-  });
-  it('unit test setTvshows', () => {
-    service.setTvshows(tvshowData);
-    expect(service.setTvshows).toBeDefined();
-  });
-
-  it('unit test getTvshows', () => {
-    service.getTvshows();
-    expect(service.getTvshows).toBeDefined();
   });
 });

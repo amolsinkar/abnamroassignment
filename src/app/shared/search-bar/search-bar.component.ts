@@ -24,9 +24,9 @@ export class SearchBarComponent implements OnInit {
 
   tvshowsSearch(): void {
     if (!this.f?.txtSearch?.invalid) {
-      this.router.navigate(['tvshows'], {
-        queryParams: { search: this.txtSearchVal },
-      });
+      this.router?.navigateByUrl(
+        `searchTvshows?search=${this.f?.txtSearch?.value}`
+      );
     }
   }
 

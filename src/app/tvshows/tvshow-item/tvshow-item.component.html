@@ -2,16 +2,19 @@
   <figure>
     <a
       style="cursor: pointer"
-      [routerLink]="[tvshow.id]"
-      routerLinkActive="active"
-
+      (click)="sendToList(tvshow.id)"
+     
     >
       <img
-        [src]="tvshow?.image?.original"
+        *ngIf="tvshow?.image; else imageNotAvailable"
+        [src]="tvshow?.image && tvshow?.image?.original"
         alt="{{ tvshow.name }}-{{ tvshow.rating.average }}"
         title=" {{ tvshow.name }}"
         class="image-height img-responsive"
       />
+      <ng-template #imageNotAvailable>
+        <img class="image-height img-responsive imageNotAvailable" />
+      </ng-template>
     </a>
   </figure>
   <div>
@@ -25,4 +28,3 @@
     >
   </div>
 </div>
-

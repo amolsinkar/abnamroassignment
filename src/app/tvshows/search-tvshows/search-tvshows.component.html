@@ -1,27 +1,27 @@
 <div class="row">
   <div *ngIf="noresultfound; else noResultfound">
-    <div
+    <!-- <div
       *ngFor="
         let grpTvShows of groupTvShowsArr | keyvalue;
         let grpIndex = index
       "
-    >
-      <div>
-        <h2>{{ grpTvShows.key }}</h2>
-      </div>
-      <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start">
-        <ng-container *ngFor="let tvshowEl of grpTvShows.value; let i = index">
-          <app-tvshow-item
-            fxFlex="1 2 12vw"
-            fxFlex.md="1 2 12vw"
-            fxFlex.sm="1 2 20vw"
-            fxFlex.xs="1 2 35vw"
-            [tvshow]="tvshowEl"
-            [index]="i"
-          ></app-tvshow-item>
-        </ng-container>
-      </div>
+    >-->
+    <div>
+      <h2>Search Result for {{ searchText | uppercase }}</h2>
     </div>
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+      <ng-container *ngFor="let tvshowEl of tvshows; let i = index">
+        <app-tvshow-item
+          fxFlex="1 2 12vw"
+          fxFlex.md="1 2 12vw"
+          fxFlex.sm="1 2 20vw"
+          fxFlex.xs="1 2 35vw"
+          [tvshow]="tvshowEl.show"
+          [index]="i"
+        ></app-tvshow-item>
+      </ng-container>
+    </div>
+    <!-- </div> -->
   </div>
   <ng-template #noResultfound>
     <div class="container">

@@ -3,7 +3,6 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { TvshowService } from '../tvshows/tvshow.service';
 import { DataStorageService } from './data-storage.service';
 
 describe('DataStorageService', () => {
@@ -167,16 +166,9 @@ describe('DataStorageService', () => {
     },
   ];
   beforeEach(() => {
-    const tvshowServiceStub = () => ({
-      setTvshows: (tvshows) => {},
-    });
-
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        DataStorageService,
-        { provide: TvshowService, useFactory: tvshowServiceStub },
-      ],
+      providers: [DataStorageService],
     });
     service = TestBed.inject(DataStorageService);
   });
@@ -186,12 +178,8 @@ describe('DataStorageService', () => {
   });
 
   describe('fetchTvshows', () => {
-    it('makes expected calls', () => {
+    it('get call', () => {
       const httpTestingController = TestBed.inject(HttpTestingController);
-      const tvshowServiceStub: TvshowService = TestBed.inject(TvshowService);
-      spyOn(tvshowServiceStub, 'setTvshows')
-        .withArgs(tvshowData)
-        .and.callThrough();
       service.fetchTvshows().subscribe((res) => {
         expect(res).toEqual(tvshowData);
       });
@@ -200,6 +188,35 @@ describe('DataStorageService', () => {
       );
       expect(req.request.method).toEqual('GET');
       req.flush(tvshowData);
+      httpTestingController.verify();
+    });
+  });
+  describe('getTvshowsDetails', () => {
+    it('get call', () => {
+      const httpTestingController = TestBed.inject(HttpTestingController);
+      service.getTvshowsDetails('1').subscribe((res) => {
+        expect(res).toEqual([]);
+      });
+      const req = httpTestingController.expectOne(
+        'http://api.tvmaze.com/shows/1'
+      );
+      expect(req.request.method).toEqual('GET');
+      req.flush([]);
+      httpTestingController.verify();
+    });
+  });
+
+  describe('getSearchTvshows', () => {
+    it('get call', () => {
+      const httpTestingController = TestBed.inject(HttpTestingController);
+      service.getSearchTvshows('test').subscribe((res) => {
+        expect(res).toEqual([]);
+      });
+      const req = httpTestingController.expectOne(
+        'http://api.tvmaze.com/search/shows?q=test'
+      );
+      expect(req.request.method).toEqual('GET');
+      req.flush([]);
       httpTestingController.verify();
     });
   });
