@@ -7,11 +7,11 @@ export class TvshowService {
 
   constructor() {}
 
-  setTvshows(tvshows: TvshowModel[]) {
+  setTvshows(tvshows: TvshowModel[]): void {
     this.tvshows = tvshows;
   }
 
-  getTvshows() {
+  getTvshows(): TvshowModel[] {
     return this.tvshows ? this.tvshows.slice() : [];
   }
 }

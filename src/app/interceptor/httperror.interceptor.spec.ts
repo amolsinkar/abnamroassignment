@@ -31,7 +31,7 @@ describe('HttpErrorInterceptor', () => {
       ],
     });
     service = TestBed.inject(HttpErrorInterceptor);
-    httpMock = TestBed.get(HttpTestingController);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('can load instance', () => {
@@ -40,12 +40,12 @@ describe('HttpErrorInterceptor', () => {
 
   describe('intercept', () => {
     it('makes expected calls', () => {
-      const httpRequestStub: HttpRequest<any> = <any>{
+      const httpRequestStub: any = {
         clone: () => {
           return of();
         },
       };
-      const httpHandlerStub: HttpHandler = <any>{
+      const httpHandlerStub: HttpHandler = {
         handle: () => {
           return of();
         },

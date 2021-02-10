@@ -4,13 +4,14 @@ import { map, tap } from 'rxjs/operators';
 
 import { TvshowModel } from '../tvshows/tvshow.model';
 import { TvshowService } from '../tvshows/tvshow.service';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
   tvshows: TvshowModel[];
   constructor(private http: HttpClient, private tvshowService: TvshowService) {}
 
-  fetchTvshows() {
+  fetchTvshows(): Observable<TvshowModel[]> {
     return this.http.get<TvshowModel[]>('http://api.tvmaze.com/shows').pipe(
       map((tvshows) => {
         return tvshows.map((tvshow) => {

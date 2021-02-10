@@ -17,11 +17,12 @@ export class TvshowDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
-      this.tvshows = this.route.snapshot.data['showResolverDetails']?.filter(
+      const id = 'id';
+      const showResolverDetails = 'showResolverDetails';
+      this.id = +params[id];
+      this.tvshows = this.route.snapshot.data[showResolverDetails]?.filter(
         (element: TvshowModel) => {
           if (element.id === this.id) {
-            console.log('tvshows', element);
             return element;
           }
         }
@@ -30,7 +31,7 @@ export class TvshowDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

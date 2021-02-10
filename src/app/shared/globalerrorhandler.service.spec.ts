@@ -5,10 +5,9 @@ import { LoggingService } from './logging.service';
 
 describe('GlobalErrorHandler', () => {
   let service: GlobalErrorHandler;
-  let loggingservice: LoggingService;
   beforeEach(() => {
     const injectorStub = () => ({
-      get: (loggingService) => ({ path: () => ({}) }),
+      get: () => ({ path: () => ({}) }),
     });
     TestBed.configureTestingModule({
       providers: [

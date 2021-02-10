@@ -30,7 +30,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
 
-        window.alert(errorMessage);
+        window.alert(errorMessage); // TODO: bootstrap modal popup
         return throwError(errorMessage);
       })
     );

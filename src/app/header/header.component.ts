@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   public txtSearchVal;
   ngOnInit(): void {}
 
-  routeToTvshows() {
+  routeToTvshows(): void {
     this.router.navigateByUrl('/tvshows');
   }
 }

@@ -10,7 +10,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(() => {
     const tvshowServiceStub = () => ({});
-    const routerStub = () => ({ navigateByUrl: (string) => ({}) });
+    const routerStub = () => ({ navigateByUrl: () => ({}) });
     TestBed.configureTestingModule({
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [HeaderComponent],

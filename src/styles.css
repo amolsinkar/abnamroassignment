@@ -114,4 +114,7 @@ div.ellipsis:hover {
   .marginAuto {
     margin: auto;
   }
+  .paddingLeft20{
+    padding-left: 20vh;
+  }
 }

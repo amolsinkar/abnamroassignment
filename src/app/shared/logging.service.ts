@@ -5,7 +5,7 @@ import * as StackTrace from 'stacktrace-js';
 export class LoggingService {
   constructor() {}
 
-  log({ message, url, stack: any }) {
+  log({ message, url, stack }): void {
     console.log(new Date() + ': ' + JSON.stringify(message));
   }
 }

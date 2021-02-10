@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -37,17 +37,18 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  tvshowLoad() {
-    this.tvshows = this.route.snapshot?.data['showResolver'];
+  tvshowLoad(): void {
+    const showResolver = 'showResolver';
+    this.tvshows = this.route.snapshot?.data[showResolver];
     this.tvshows?.sort((a, b) => b.rating.average - a.rating.average);
     this.groupTvShowsArr = this.filterByGenre(this.tvshows);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
 
-  filterByGenre(tvshows) {
+  filterByGenre(tvshows): any {
     return tvshows?.reduce((r, a) => {
       const copy = Object.assign({}, a);
       a?.genres?.forEach((item, index) => {
@@ -58,7 +59,7 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
     }, {});
   }
 
-  onLinkClick() {
+  onLinkClick(): void {
     this.router.navigateByUrl('/tvshows');
   }
 }

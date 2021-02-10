@@ -9,9 +9,9 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./search-bar.component.css'],
 })
 export class SearchBarComponent implements OnInit {
-  public txtSearchVal;
-  alphaNumericValidator = '^$|^[A-Za-z0-9]+';
-  searchForm: FormGroup;
+  public txtSearchVal: string;
+  public alphaNumericValidator = '^$|^[A-Za-z0-9]+';
+  public searchForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder) {}
 
@@ -22,7 +22,7 @@ export class SearchBarComponent implements OnInit {
     });
   }
 
-  tvshowsSearch() {
+  tvshowsSearch(): void {
     if (!this.f?.txtSearch?.invalid) {
       this.router.navigate(['tvshows'], {
         queryParams: { search: this.txtSearchVal },
@@ -30,7 +30,7 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
-  get f() {
+  get f(): any {
     return this.searchForm?.controls;
   }
 }

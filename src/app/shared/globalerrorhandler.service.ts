@@ -7,7 +7,7 @@ import * as StackTrace from 'stacktrace-js';
 export class GlobalErrorHandler implements ErrorHandler {
   constructor(private injector: Injector) {}
 
-  handleError(error) {
+  handleError(error): any {
     const loggingService = this.injector.get(LoggingService);
     const location = this.injector.get(LocationStrategy);
     const message = error.message ? error.message : error.toString();
@@ -17,7 +17,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     StackTrace.fromError(error).then((stackframes) => {
       const stackString = stackframes
         .splice(0, 20)
-        .map(function (sf) {
+        .map((sf): string => {
           return sf.toString();
         })
         .join('\n');
