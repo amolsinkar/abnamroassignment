@@ -42,7 +42,7 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
       this.tvshows = data?.showResolver;
     });
     this.tvshows?.sort((a, b) => b.rating.average - a.rating.average);
-    const items = this.tvshows?.slice(0, 10);
+    const items = this.tvshows?.slice(0, 14);
     console.log(items);
     this.groupTvShowsArr = this.filterByGenre(this.tvshows);
     if (this.groupTvShowsArr) {
