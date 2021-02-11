@@ -7,7 +7,9 @@
       "
     >
       <div>
-        <h2>{{ grpTvShows.key }}</h2>
+        <h2>
+          {{  grpTvShows.key === "A" ? "Toprated" : grpTvShows.key }}
+        </h2>
       </div>
       <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="flex-start">
         <ng-container *ngFor="let tvshowEl of grpTvShows.value; let i = index">

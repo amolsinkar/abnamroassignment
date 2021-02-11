@@ -42,7 +42,14 @@ export class TvshowsListComponent implements OnInit, OnDestroy {
       this.tvshows = data?.showResolver;
     });
     this.tvshows?.sort((a, b) => b.rating.average - a.rating.average);
+    const items = this.tvshows.slice(0, 10);
+    console.log(items);
     this.groupTvShowsArr = this.filterByGenre(this.tvshows);
+    // this.groupTvShowsArr.TopRated = [];
+    if (this.groupTvShowsArr) {
+      this.groupTvShowsArr.A = items;
+      // this.groupTvShowsArr.unshift('Toprated');
+    }
   }
 
   ngOnDestroy(): void {
